@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import dogData from "./db.json";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Nav from "./Nav";
+import DogList from "./DogList";
+import FindDog from "./FindDog";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Welcome to Dog Finder.</h1>
+      <BrowserRouter>
+        <Nav dogs={dogData.dogs} />
+        <Routes>
+          <Route path="/dogs" element={<DogList dogs={dogData.dogs} />} />
+          <Route path="/dogs/:name" element={<FindDog dogs={dogData.dogs} />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
