@@ -1,19 +1,19 @@
 import { render, screen } from "@testing-library/react";
+import React from "react";
 import App from "./App";
+import dogs from "./_testDogs";
 
-test("renders learn react link", () => {
+test("renders welcome to dog finder", () => {
   render(<App />);
   const linkElement = screen.getByText("Welcome to Dog Finder.");
   expect(linkElement).toBeInTheDocument();
 });
 
-// import Router from "react-router";
-// Router.useParams = jest.fn();
-// import Dog from "./Dog";
-
-// import { render, screen, waitFor } from "@testing-library/react";
-
-// test("renders learn react link", () => {
-//   Router.useParams.mockReturnValue({ a: "b" });
-//   render(<Dog />);
-// });
+test("renders all dog names in the list", () => {
+  render(<App />);
+  const dogNames = dogs.map((d) => d.name);
+  for (const name of dogNames) {
+    const linkElement = screen.getByText(new RegExp(`Meet: ${name}`, "i"));
+    expect(linkElement).toBeInTheDocument();
+  }
+});

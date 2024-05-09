@@ -1,6 +1,6 @@
 import "./App.css";
 import dogData from "./db.json";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Nav from "./Nav";
 import DogList from "./DogList";
@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/dogs" element={<DogList dogs={dogData.dogs} />} />
           <Route path="/dogs/:name" element={<FindDog dogs={dogData.dogs} />} />
+          <Route path="/*" element={<Navigate to="/dogs" />} />
         </Routes>
       </BrowserRouter>
     </div>
